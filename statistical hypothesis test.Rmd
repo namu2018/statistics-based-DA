@@ -1,0 +1,31 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+t.test(df$Before, df$After, alternative=c("two.sided"), paired=TRUE, conf.level=0.95)
+t.test(df$Before, df$After, alternative=c("greater"), paired=TRUE, conf.level=0.95)
+```
+#independent standard t-검정   
+```{r}
+library(MASS)
+head(UScrime)
+UScrime
+t.test(Prob ~ So, data=UScrime)
+```
+##대립가설: 남부와 비남부가 같은 투옥확률을 갖지 않는다 
+
+##두 집단의 관측치가 관계되어 있는 경우 
+##U1: 14~24세 지역 남성의 실업률
+##U2: 35~39세 지역 남성의 실업률  
+```{r}
+US <- UScrime
+cor(US$U1, US$U2)
+t.test(US$U1, US$U2)
+t.test(US$U1, US$U2, paired=TRUE)
+```

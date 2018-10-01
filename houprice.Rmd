@@ -1,0 +1,63 @@
+
+##목적: 1970년대 보스턴 내 주거지역 가격을 예측하는 모데을 만들수 있을까까
+## 표본추추
+```{r}
+getwd()
+df <- read.csv("housing.csv", header=F, sep='', stringsAsFactors= FALSE)
+head(df,10)
+str(df)
+names(df) <- c("crim", "zn", "indus", "chas", "nox", "rm", 
+               "age", "dis", "rad", "tax", "ptratio", "black", "lstat", "medv")
+names(df)
+str(df)
+library(stringr)
+```
+##데이터 탐색- 정규표현식   
+```{r}
+mean(df$rm)
+sum(is.na(df$rm))
+grep("[a-zA-Z]", df$rm, value = TRUE)
+which(df$rm=='miss')
+df[df$rm=='miss','rm']<-NA
+df$rm =as.numeric(df$rm)
+boxplot(df$rm)
+
+```
+##NA 처리시 이상치가 많을경우 중앙값으로 처리한다   
+```{r}
+df[is.na(df$rm),'rm']<- median(df$rm, na.rm=T)
+str(df)
+```
+##실수형 값 확인   
+```{r}
+grep("[0-9][.][0-9]", df$rm, value= TRUE)
+```
+##df$dif
+```{r}
+sum(is.na(df$dis))
+grep("[a-zA-Z]", df$dis,value=TRUE)
+df[df$dif=='miss','dis']<-NA
+df$dis =as.numeric(df$dis)
+LM <- lm(dis~., df)
+summary(LM)
+str(df)
+prev=predict(LM, newdata=df[37,])
+plot(df)
+```
+```{r}
+par(mfrow=c(3,4))
+plot(medv~crim, data=df)
+plot(medv~zn, data=df)
+plot(medv~indus, data=df)
+plot(medv~chas, data=df)
+plot(medv~nox, data=df)
+plot(medv~rm, data=df)
+plot(medv~age, data=df)
+plot(medv~dis, data=df)
+plot(medv~rad, data=df)
+plot(medv~black, data=df)
+plot(medv~lstat, data=df)
+
+
+```
+
