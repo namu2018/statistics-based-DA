@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538438696901.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2815600712",
+    "id" : "7EFF6FA2",
+    "lastKnownWriteTime" : 1538455155,
+    "last_content_update" : 1538455155764,
+    "path" : "~/choi_dontouch/R-basic/10월 2일/상관관계(cortest).r",
+    "project_path" : "상관관계(cortest).r",
+    "properties" : {
+        "cursorPosition" : "46,0",
+        "scrollLine" : "28",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

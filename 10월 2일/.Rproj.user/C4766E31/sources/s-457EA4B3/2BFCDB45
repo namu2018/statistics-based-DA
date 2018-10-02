@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538447326082.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3153351566",
+    "id" : "2BFCDB45",
+    "lastKnownWriteTime" : 1538455136,
+    "last_content_update" : 1538455136174,
+    "path" : "~/choi_dontouch/R-basic/10월 2일/카이제곱 평균.r",
+    "project_path" : "카이제곱 평균.r",
+    "properties" : {
+        "cursorPosition" : "6,23",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

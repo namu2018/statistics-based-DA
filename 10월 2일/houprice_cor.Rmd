@@ -1,0 +1,28 @@
+
+setwd("C:/Users/ktm/Documents/choi_dontouch/R-basic/10월1일")
+df <- read.csv("housing.csv", header=F, sep='', stringsAsFactors= FALSE)
+names(df) <- c("crim", "zn", "indus", "chas", "nox", "rm", 
+               "age", "dis", "rad", "tax", "ptratio", "black", "lstat", "medv")
+grep("[a-zA-Z]", df$rm, value = TRUE)
+which(df$rm=='miss')
+df$rm
+str(df)
+df[df$rm=='miss','rm']<-NA
+df$rm <- as.numeric(df$rm)
+df[is.na(df$rm),'rm']<- median(df$rm, na.rm=T)
+sapply(df, function(x) {grep("[a-zA-Z]", x)} )
+sapply(df, function(x) {sum(is.na(x))})
+
+df[df$dis=='miss','dis']<- NA
+df$dis<- as.numeric(df$dis)
+df[is.na(df$dis),'dis']<- median(df$dis, na.rm=T)
+sapply(df, function(x) {sum(is.na(x))})
+apply(df, var)
+str(df)
+
+cor(df)
+h_cor<- cor(df)
+corrplot(h_cor, method="color", addCoef.col="black")
+lstat, rm, ptratio
+cor.test(df$medv, df$lstat)
+cor.test(df$medv, df$rm)

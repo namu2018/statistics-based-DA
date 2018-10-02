@@ -1,0 +1,4 @@
+"0","plot(medv~rm, data=df)
+"
+"2","Error in eval(predvars, data, env) : object 'medv' not found
+"

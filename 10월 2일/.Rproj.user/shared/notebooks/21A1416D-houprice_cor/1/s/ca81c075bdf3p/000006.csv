@@ -1,0 +1,10 @@
+"0","setwd(""C:/Users/ktm/Documents/choi_dontouch/R-basic/10월1일"")
+"
+"2","Warning message:
+"
+"2","In strsplit(code, ""\n"", fixed = TRUE) :"
+"2","
+ "
+"2"," input string 1 is invalid in this locale
+"
+"2","The working directory was changed to C:/Users/ktm/Documents/choi_dontouch/R-basic/10월1일 inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the working directory for notebook chunks."

@@ -1,0 +1,328 @@
+[R] 카이제곱 분포(Chi-square distribution)와 카이제곱 검정 (Chi-squared test)
+R 2015.12.30 21:45
+(며칠동안 공부하면서 정리한 내용이라 많이 틀릴 수 있다..)
+
+
+
+
+
+* 카이제곱 소개
+
+
+
+데이터의 중심 위치는 평균인데, 치우침을 표현하는 것이 분산이나 표준편차(standard deviation)이다.
+
+퍼져 있는 분산을 분포(distribution)로 만는데. 
+
+(데이터의 결과를 집합적으로 나타내는 특징이 집합적으로 나타난다.
+  
+  랭킹 데이터나 추천 데이터 만들 때 분포로 나타나는 현상이 나온다.)
+
+그 중의 하나가 카이제곱 분포이다. x^2 분포이다.
+
+
+
+
+
+
+
+* 분포 
+
+
+
+참고로, 분포는 여러 개가 있다.
+
+- 정규 분포(normal distribution) : 가운데가 복록 나온 완벽한 좌우 대칭의 형태의 분포
+
+- 표준 정규 분포 (standard normal distribution), z 분포 : 평균이 0이고, 표준 편차가 1인 정규 분포
+
+- t 분포 : 정규 분포의 평균을 측정할 때 사용되는 분포
+
+- 카이제곱 분포 
+
+- F 분포
+
+- 포아송 분포 
+
+
+
+검정(test)는 분포와 연관이 있다.
+
+- z 검정 (표준 정규 분포, z 분포와 연관) : 두 집단이 정규 분포이면, 평균을 통해 크기를 비교하는 것
+
+- t 검정 (t분포) : t 분포를 이용하여 두 집단을 비교하는 방법, z 검정 대신 사용하는 이유는 표본수가 적어서..
+
+- 카이제곱 검정 : 관찰된 빈도가 기대되는 빈도와 의미있게 다른지의 여부를 검증하기 위해 사용되는 검증방법. 교차 분석 또는 카이 자승 검정이라고 하기도 한다.
+
+(z 검정, t 검정은 평균 값의 가설 검정에 쓰이고, 카이제곱은 확률을 검정) 
+
+
+
+
+
+
+
+
+
+*카이제곱  분포
+
+
+
+chi 는 '카이'로 발음하며, 그리스 문자이다. 보통 x로 쓴다. 그래서 카이제곱 = x^2 인 셈이다.
+참고로, R에서 카이제곱 검정 함수는 chisq.test() 이다.
+
+
+x^2이니까 +x이든, -x이든 x*x 가 된다. 따라서 분포도상 큰 분포도가 된다. (이런게 진짜 실제 세계의 분포 같기도 하다.)
+
+
+
+
+출처: http://grants.hhp.coe.uh.edu/doconnor/PEP6305/chisquare.htm
+
+
+
+
+그래프를 보면, 0에서 멀어지면 분포가 감소하고, 0으로 가까워지면, 분포가 많아진다. 
+변수(x)와 특정 현상(y) 사이의 연관성을 보고 싶을 때이다. 순수한 값만 가지고 접근하기 때문에 % 값이 아니다. 
+
+
+
+* 카이제곱 검정
+
+카이제곱 검정은 구간 별로 관측된 빈도와 기대 빈도의 차이를 살펴 봄으로서, 확률 모형이 얼마나 자료를 잘 설명하는지 사용한다. 3 개 이상의 범주가 존재할 때 사용된다. 
+
+
+카이제곱은 기본자료, 확률모형, 도수 분포표(따로 정의된 표)이 존재하며 
+카이제곱 통계량, 자유도를 측정하여 관찰 유의 수준(관찰될 가능성 또는 p값)을 얻을 수 있다고 한다.
+
+
+(출처 : http://www-users.york.ac.uk/~mb55/msc/ytustats/chiodds.htm)
+자유도 4인 값이 p값이 5% 확률로 관찰될 수 있음
+
+
+귀무가설(H0, 두 변수는 연관성이 없다.)과 대립가설(H1, 두 변수는 연관성이 없다.)로 가설을 검증한다.
+귀무 가설하에서 카이제곱 통계량이 크면 관측된 유의 수준은 작아진다고 한다.
+
+이상한 통계예일 수 있는데, 성별과 오른손/왼손 잡이와 관련이 있는걸까? 관련있다고 나온다면 우연일까 아닐까? 
+  관측 도수와 기대도수, 카이제곱 통계량을 계산 후 편차로부터 얻은 자유도 값으로 '카이제곱 검정표'를 찾아 p값을 찾는다. p값이 작게 나오면(0.05보다 작다면) 서로 연관성이 없다는 귀무가설이 기각된다. 성별과 오른손/왼손 잡이와는 연관성이 있다라고 분석할  수 있다.
+(참조하기 좋은 내용 : http://math7.tistory.com/58, http://www.6025.co.kr/statistics/ka.asp)
+
+
+* 관측도수와 기대도수
+
+
+녹색
+
+빨간 색 
+
+계 
+
+좋아요
+
+a 
+
+b 
+
+a + b 
+
+좋아하지 않아요
+
+c 
+
+d 
+
+c + d 
+
+
+
+a + c 
+
+b + d 
+
+a + b + c + d  
+
+
+
+a의 기대도수  = (a+b) (a+c) / (a+b+c+d)
+
+b의 기대도수  = (a+b) (c+d) / (a+b+c+d)
+
+c의 기대도수  = (c+d) (a+c) / (a+b+c+d)
+
+d의 기대도수  = (c+d) (b+d) / (a+b+c+d)
+
+
+
+모든 기대도수의 값은 5보다 커야 한다. 기대도수가 5보다 작은 경우는 전체 기대 도수 값 개수보다 1/4보다 작아야 한다.
+
+
+R에서도 기대도수 값 및 각종 통계 지표를 뽑아낼 수 있다. 
+
+
+
+
+
+* R 이용하기
+
+- 적합성 검정
+
+빨간 색을 좋아하는 사람이 녹색을 같이 좋아할까? 라는 예시코드를 chisq() 함수로 써본다.
+
+
+> likeStat <- matrix(c(5,10,12,3),nrow=2)
+> likeStat
+[,1] [,2]
+[1,]    5   12
+[2,]   10    3
+> dimnames(likeStat) <- list("L"=c("Like","Not Like"), "stat"=c("Red", "Green"))
+> likeStat
+stat
+L          Red Green
+Like       5    12
+Not Like  10     3
+> addmargins(likeStat)
+stat
+L          Red Green Sum
+Like       5    12  17
+Not Like  10     3  13
+Sum       15    15  30
+> chisq.test(likeStat)
+
+Pearson's Chi-squared test with Yates' continuity
+correction
+
+data:  likeStat
+X-squared = 4.8869, df = 1, p-value = 0.02706
+
+
+카이제곱은 4.8869 이고, 자유도 값은 1이며, p 값은 0.027 이다. 0.05보다 작으므로 연관성이 없다.
+빨간 색을 좋아하는 사람과 녹색을 좋아하는 사람은 연관이 없다. 
+
+> likeStat <- matrix(c(5,10,3,12),nrow=2)
+> likeStat
+[,1] [,2]
+[1,]    5    3
+[2,]   10   12
+> dimnames(likeStat) <- list("L"=c("Like","Not Like"), "stat"=c("Red", "Green"))
+> likeStat
+stat
+L          Red Green
+Like       5     3
+Not Like  10    12
+> addmargins(likeStat)
+stat
+L          Red Green Sum
+Like       5     3   8
+Not Like  10    12  22
+Sum       15    15  30
+> chisq.test(likeStat)
+
+Pearson's Chi-squared test with Yates' continuity
+correction
+
+data:  likeStat
+X-squared = 0.17045, df = 1, p-value = 0.6797
+
+경고메시지(들): 
+  In chisq.test(likeStat) :
+  카이제곱 approximation은 정확하지 않을수도 있습니다
+
+
+카이제곱은 0.17이고, p값은 0.67이다. 0.05보다 크므로 연관성이 있음을 볼 수 있다. 귀무가설 적합.
+
+
+
+만약 색깔이 녹색, 빨간, 노란색이 있다고 가정하고 다시 한번 카이제곱 검증 chisq.test()를 사용하면 결과는 다음과 같다.
+> likeStat <- matrix(c(5,18,12,11,18,7),nrow=2)
+> chisq.test(likeStat)
+
+
+Pearson's Chi-squared test
+
+data:  likeStat
+X-squared = 12.22, df = 2, p-value = 0.002221
+
+
+
+카이제곱 검정 함수 리턴값의 속성을 확인할 수 있다.
+
+> likeStat <- matrix(c(5,18,12,11,18,7),nrow=2)
+> likeStat
+[,1] [,2] [,3]
+[1,]    5   12   18
+[2,]   18   11    7
+> result <- chisq.test(likeStat)
+> result$statistic
+X-squared 
+12.21964 
+> result$observed
+[,1] [,2] [,3]
+[1,]    5   12   18
+[2,]   18   11    7
+> result$p.value
+[1] 0.002220946
+> result$expected
+[,1]     [,2]     [,3]
+[1,] 11.33803 11.33803 12.32394
+[2,] 11.66197 11.66197 12.67606
+> result$residuals
+[,1]       [,2]      [,3]
+[1,] -1.882285  0.1965942  1.616858
+[2,]  1.855958 -0.1938445 -1.594243
+> result$parameter
+df 
+2
+
+- xtabs를 이용한 적합성 검정 
+
+chisq.test() 없이 xtabs와 summary를 통해서도 카이제곱 검정 값을 구할 수 있다. 
+담배피는 사람과 체중간의 연관성 확인하기
+> stat <- matrix(c(23,50,42,10,67,23,22,90,25),ncol=3)
+> stat
+[,1] [,2] [,3]
+[1,]   23   10   22
+[2,]   50   67   90
+[3,]   42   23   25
+> dimnames(stat) <- list("smoking"=c("over","none", "regular"), "wight"=c("over", "under", "regular"))
+> stat
+wight
+smoking   over under regular
+over      23    10      22
+none      50    67      90
+regular   42    23      25
+> apply(stat, 1, sum)
+over    none regular 
+55     207      90 
+> apply(stat, 2, sum)
+over   under regular 
+115     100     137 
+> summary(xtabs(under~over+regular, data=stat))
+Call: xtabs(formula = under ~ over + regular, data = stat)
+Number of cases in table: 100 
+Number of factors: 2 
+Test for independence of all factors:
+Chisq = 200, df = 4, p-value = 3.757e-42
+Chi-squared approximation may be incorrect
+> 
+
+
+
+
+
+* 추가
+- 카이제곱 한계
+표본수가 적거나 너무 치우치면 카이제곱의 결과가 부정확할 수 있으니.
+피셔의 정확 검정-fisher.test()을 사용한다. 
+(고급스럽게 말하면, 앞에서 얘기한 기대도수의 값이 5 이하인 것이 전체 기대도수 값들 중 1/4이 넘으면.. 피셔 검정을 사용한다.)
+
+
+- R의 카이제곱 함수 중 다양한 함수가 있다.
+1. 밀도 함수 dchisq
+2. 누적분포함수 pchisq
+3. 분위수 함수 qchisq
+4. 난수 발생 rchisq 
+(출처 : http://rfriend.tistory.com/112)
+
+
+
+출처: http://knight76.tistory.com/entry/R-카이제곱-검정-Chisquared-test [김용환 블로그(2004-2018)]
